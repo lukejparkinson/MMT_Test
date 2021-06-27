@@ -1,6 +1,6 @@
 # MMT_Test
 
---Improvements--
+**Improvements**
 
 1. Add authorization to project
 2. Validate email is valid email address
