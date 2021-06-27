@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DeliveryUpdate.Api</name>
+    </assembly>
+    <members>
+        <member name="M:DeliveryUpdate.Api.Controllers.OrderController.GetMostRecentOrder(DeliveryUpdate.Api.Model.CustomerOrder.CustomerOrderRequest)">
+            <summary>
+            Gets the most recent customer order
+            </summary>
+            <response code="200">Recent order details returned</response>
+            <response code="404">Customer not found</response>
+            <response code="409">Invalid customer request</response>
+            <response code="400">Bad request received</response>
+        </member>
+        <member name="T:DeliveryUpdate.Api.Model.CustomerOrder.CustomerOrderRequest">
+            <summary>
+            The request object requiring customer identifiers
+            </summary>
+        </member>
+        <member name="P:DeliveryUpdate.Api.Model.CustomerOrder.CustomerOrderRequest.User">
+            <summary>
+            The email address of the customer
+            </summary>
+        </member>
+        <member name="P:DeliveryUpdate.Api.Model.CustomerOrder.CustomerOrderRequest.CustomerId">
+            <summary>
+            The Customer Identifier
+            </summary>
+        </member>
+    </members>
+</doc>

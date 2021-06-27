@@ -3,6 +3,7 @@ using DeliveryUpdate.Api.Model.CustomerOrder;
 using DeliveryUpdate.Api.Model.Order;
 using DeliveryUpdate.Service.Customer;
 using DeliveryUpdate.Service.Order;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
@@ -13,7 +14,6 @@ namespace DeliveryUpdate.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Produces("application/json")]
     public class OrderController : ControllerBase
     {
         private readonly ILogger<OrderController> _logger;
@@ -26,8 +26,20 @@ namespace DeliveryUpdate.Api.Controllers
             _customerService = customerService;
         }
 
+        /// <summary>
+        /// Gets the most recent customer order
+        /// </summary>
+        /// <response code="200">Recent order details returned</response>
+        /// <response code="404">Customer not found</response>
+        /// <response code="409">Invalid customer request</response>
+        /// <response code="400">Bad request received</response>
         [HttpPost]
-        [Route("getmostrecentorder")]
+        [Route("GetMostRecentOrder")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(CustomerOrderResult), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status409Conflict)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<CustomerOrderResult>> GetMostRecentOrder(CustomerOrderRequest customerOrderRequest)
         {
             var customerResponse = await _customerService.GetCustomer(new CustomerRequest
